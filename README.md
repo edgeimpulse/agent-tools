@@ -1,8 +1,8 @@
 # Edge Impulse Agent Skills
 
-This repository contains the public catalog of Edge Impulse agent skills.
+This repository contains the public catalog of Edge Impulse Agent Skills.
 
-Agent skills are reusable building blocks that help agents interact with Edge Impulse data, projects, deployments, and workflows.
+Agent Skills are reusable building blocks that help agents interact with Edge Impulse data, projects, deployments, and workflows.
 
 This repository is intended for developers and users who want to discover, install, and use skills.
 
