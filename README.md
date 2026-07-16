@@ -4,7 +4,26 @@ This repository contains the public catalog of Edge Impulse Agent Skills.
 
 Agent Skills are reusable building blocks that help agents interact with Edge Impulse data, projects, deployments, and workflows.
 
-This repository is intended for developers and users who want to discover, install, and use skills.
+This repository is intended for developers and users who want to discover, install, and use skills. Every skill follows the [Agent Skills specification](https://agentskills.io/specification).
+
+## Stable skills
+
+| Skill | Purpose |
+| --- | --- |
+| `api` | Edge Impulse APIs, CLIs, SDKs, devices, deployments, and custom blocks |
+| `build-arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse models, and Flask UIs |
+| `deploy-arduino` | Arduino sketches using exported Edge Impulse libraries |
+| `deploy-custom-deployment-blocks` | Edge Impulse custom deployment blocks |
+
+## Experimental skills
+
+| Skill | Purpose |
+| --- | --- |
+| `build-arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router |
+| `deploy-linux-cpp` | Linux C++ apps using exported Edge Impulse libraries |
+| `deploy-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models |
+| `deploy-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration |
+| `deploy-zephyr` | Zephyr and nRF Connect SDK module integration |
 
 ## Installing and removing skills
 
@@ -15,19 +34,19 @@ Below are some of the common commands for the `skills` CLI tool.
 **List all available skills:**
 
 ```
-npx skills add edgeimpulse/agent-skills --list
+npx skills add edgeimpulse/agent-tools --list
 ```
 
 **Install a skill (interactively):**
 
 ```
-npx skills add edgeimpulse/agent-skills
+npx skills add edgeimpulse/agent-tools
 ```
 
 **Install a specific skill:**
 
 ```
-npx skills add edgeimpulse/agent-skills --skill <skill-name>
+npx skills add edgeimpulse/agent-tools --skill <skill-name>
 ```
 
 **Remove a specific skill:**
@@ -36,30 +55,22 @@ npx skills add edgeimpulse/agent-skills --skill <skill-name>
 npx skills remove <skill-name>
 ```
 
-## Experimental, stable, and deprecated skills
+## Catalog lifecycle
 
-Skills in this repository follow a simple stability model:
+The lifecycle directories are repository conventions rather than Agent Skills frontmatter fields:
 
 - Experimental skills live under `skills/.experimental/`
-    - May change or be removed
-    - Versions are typically < 1.0.0 (new major versions will start in experimental)
-    - Suitable for early adopters and feedback
+  - They may change or be removed.
+  - They are suitable for early adopters and feedback.
 - Stable skills live under `skills/`
-    - Backwards-compatibility is expected in same major version
-    - Versions are >= 1.0.0
-- When a new major version is released, the previous major version moves to the `skills/.deprecated/` directory
+  - Backwards compatibility is expected.
+- Deprecated skills live under `skills/.deprecated/`.
 
-Check each skill’s `SKILL.md` for version and status information.
+## Skill versions
 
-## Versioning
+Each `SKILL.md` stores a semantic version in `metadata.version`. Stable skills start at `1.0.0`; experimental skills start at `0.1.0`.
 
-Skills use semantic versioning (`MAJOR.MINOR.PATCH`):
-
-- `0.x.y` — experimental, breaking changes allowed
-- `1.0.0` — first stable release
-- `MAJOR` — breaking changes
-- `MINOR` — new behavior, backwards-compatible
-- `PATCH` — bug fixes only
+After a push to `main`, the version workflow increments the patch component once for every skill with changed files and commits those bumps back to `main`. Changes outside a skill directory do not affect skill versions.
 
 ## Contributing
 
@@ -70,4 +81,4 @@ To report a bug:
 If you would like to propose a new skill or improvements to an existing one:
 
 - Open a pull request against this repository
-- Follow the guidelines in [CONTRIBUTING.md](/CONTRIBUTING.md)
+- Follow the guidelines in [CONTRIBUTING.md](CONTRIBUTING.md).

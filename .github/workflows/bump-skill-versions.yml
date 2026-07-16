@@ -1,0 +1,46 @@
+name: Bump changed skill versions
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "skills/**"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bump-skill-versions-main
+  cancel-in-progress: false
+
+jobs:
+  bump-versions:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out main
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          ref: main
+
+      - name: Bump changed skills
+        env:
+          BEFORE_SHA: ${{ github.event.before }}
+          PUSH_SHA: ${{ github.sha }}
+        run: python3 scripts/bump_skill_versions.py --base "$BEFORE_SHA" --head "$PUSH_SHA"
+
+      - name: Commit version bumps
+        run: |
+          if git diff --quiet -- skills; then
+            echo "No skill versions needed updating."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add skills
+          git commit -m "chore: bump changed skill versions [skip ci]"
+          git pull --rebase origin main
+          git push origin HEAD:main
