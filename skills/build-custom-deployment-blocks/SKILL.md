@@ -2,7 +2,7 @@
 name: build-custom-deployment-blocks
 description: Author Edge Impulse custom deployment blocks (Enterprise). Use when asked to scaffold, modify, test, or push a custom deployment block — including Dockerfile, parameters.json schema, the build script that reads deployment-metadata.json and produces deploy.zip, and the edge-impulse-blocks CLI workflow.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 Help the user author an Edge Impulse custom deployment block. A deployment block is a Docker container that Studio runs to turn a trained impulse into a downloadable artifact (firmware, library, container image, etc.). Custom deployment blocks are an **Enterprise-only** feature.
