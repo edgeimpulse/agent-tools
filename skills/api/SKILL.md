@@ -32,8 +32,8 @@ Use the detailed [reference](references/REFERENCE.md) selectively. For endpoints
 2. Fetch current state before modifying or deleting anything.
 3. Use exact API paths and schemas from the reference or OpenAPI spec.
 4. Check HTTP status and the response's `success` field.
-5. Treat training, deployment, feature generation, and similar jobs as asynchronous.
-6. Poll job status with bounded intervals. On failure, fetch the job log and surface the relevant error.
+5. Treat jobs as asynchronous. Poll `/jobs/{jobId}/status` with bounded intervals until `.job.finished` is `true`, then check `.job.finishedSuccessful`.
+6. On failure, fetch `/jobs/{jobId}/stdout/download` and show the relevant error lines. Tell users they can also monitor progress at `https://studio.edgeimpulse.com/studio/<projectId>/jobs`.
 7. Save binary or text responses without attempting JSON decoding.
 8. Verify the final resource, artifact, or job state and report it clearly.
 
