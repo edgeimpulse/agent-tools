@@ -5,7 +5,7 @@ Follow the [Agent Skills specification](https://agentskills.io/specification) fo
 ## Repository conventions
 
 1. Put stable skills in `skills/<skill-name>/`, experimental skills in `skills/.experimental/<skill-name>/`, and deprecated skills in `skills/.deprecated/<skill-name>/`.
-2. Use the `edge-impulse-` prefix for Edge Impulse workflows and `arduino-` for Arduino infrastructure. Spell product names as kebab-case components, such as `uno-q`, `app-lab`, and `raspberry-pi`; add `-cpp` or `-python` when the language distinguishes the workflow.
+2. Use action-oriented prefixes: `deploy-` for deployment workflows and `build-` for build and integration workflows; use the exact name `api` for Edge Impulse platform integrations. Follow the action with the relevant platform or tool, such as `build-arduino-`. Spell product names as kebab-case components, such as `uno-q`, `app-lab`, and `raspberry-pi`; add `-cpp` or `-python` when the language distinguishes the workflow.
 3. Add or update the skill's entry in the catalog table in `README.md`.
 4. Do not import third-party content without redistribution permission. Record distinct license terms in the skill as described by the Agent Skills specification.
 

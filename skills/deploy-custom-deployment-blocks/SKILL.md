@@ -1,5 +1,5 @@
 ---
-name: edge-impulse-custom-deployment-blocks
+name: deploy-custom-deployment-blocks
 description: Author Edge Impulse custom deployment blocks (Enterprise). Use when asked to scaffold, modify, test, or push a custom deployment block — including Dockerfile, parameters.json schema, the build script that reads deployment-metadata.json and produces deploy.zip, and the edge-impulse-blocks CLI workflow.
 ---
 

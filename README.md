@@ -6,21 +6,24 @@ Agent Skills are reusable building blocks that help agents interact with Edge Im
 
 This repository is intended for developers and users who want to discover, install, and use skills. Every skill follows the [Agent Skills specification](https://agentskills.io/specification).
 
-## Available skills
+## Stable skills
 
 | Skill | Purpose |
 | --- | --- |
-| `arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router |
-| `arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse models, and Flask UIs |
-| `edge-impulse-api` | Edge Impulse APIs, CLIs, SDKs, devices, deployments, and custom blocks |
-| `edge-impulse-arduino` | Arduino sketches using exported Edge Impulse libraries |
-| `edge-impulse-custom-deployment-blocks` | Edge Impulse custom deployment blocks |
-| `edge-impulse-linux-cpp` | Linux C++ apps using exported Edge Impulse libraries |
-| `edge-impulse-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models |
-| `edge-impulse-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration |
-| `edge-impulse-zephyr` | Zephyr and nRF Connect SDK module integration |
+| `api` | Edge Impulse APIs, CLIs, SDKs, devices, deployments, and custom blocks |
+| `build-arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse models, and Flask UIs |
+| `deploy-arduino` | Arduino sketches using exported Edge Impulse libraries |
+| `deploy-custom-deployment-blocks` | Edge Impulse custom deployment blocks |
 
-When two upstream skills target the same goal, this catalog uses the `mpous/ai-skills` version. In particular, `edge-impulse-api` supersedes the documentation's `edge-impulse` example, and `arduino-uno-q-app-lab` supersedes its `ei-app-lab` example.
+## Experimental skills
+
+| Skill | Purpose |
+| --- | --- |
+| `build-arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router |
+| `deploy-linux-cpp` | Linux C++ apps using exported Edge Impulse libraries |
+| `deploy-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models |
+| `deploy-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration |
+| `deploy-zephyr` | Zephyr and nRF Connect SDK module integration |
 
 ## Installing and removing skills
 
