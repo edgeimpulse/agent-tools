@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: bump-skill-versions-main
@@ -16,7 +17,9 @@ concurrency:
 
 jobs:
   bump-versions:
-    if: github.actor != 'github-actions[bot]'
+    if: >-
+      github.actor != 'github-actions[bot]' &&
+      !contains(github.event.head_commit.message, 'chore: bump changed skill versions')
     runs-on: ubuntu-latest
     steps:
       - name: Check out main
@@ -31,16 +34,36 @@ jobs:
           PUSH_SHA: ${{ github.sha }}
         run: python3 scripts/bump_skill_versions.py --base "$BEFORE_SHA" --head "$PUSH_SHA"
 
-      - name: Commit version bumps
+      - name: Commit version bumps to a branch
+        id: commit
+        env:
+          PUSH_SHA: ${{ github.sha }}
         run: |
           if git diff --quiet -- skills; then
             echo "No skill versions needed updating."
+            echo "has_changes=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
+          branch="automation/skill-version-bumps-${PUSH_SHA}"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git switch --create "$branch"
           git add skills
-          git commit -m "chore: bump changed skill versions [skip ci]"
-          git pull --rebase origin main
-          git push origin HEAD:main
+          git commit -m "chore: bump changed skill versions"
+          git push origin "$branch"
+
+          echo "has_changes=true" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
+
+      - name: Open version bump pull request
+        if: steps.commit.outputs.has_changes == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION_BRANCH: ${{ steps.commit.outputs.branch }}
+        run: |
+          gh pr create \
+            --base main \
+            --head "$VERSION_BRANCH" \
+            --title "chore: bump changed skill versions" \
+            --body "Automatically increments the patch versions of skills changed in the preceding push to main."
