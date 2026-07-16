@@ -66,6 +66,12 @@ The lifecycle directories are repository conventions rather than Agent Skills fr
   - Backwards compatibility is expected.
 - Deprecated skills live under `skills/.deprecated/`.
 
+## Skill versions
+
+Each `SKILL.md` stores a semantic version in `metadata.version`. Stable skills start at `1.0.0`; experimental skills start at `0.1.0`.
+
+After a push to `main`, the version workflow increments the patch component once for every skill with changed files and commits those bumps back to `main`. Changes outside a skill directory do not affect skill versions.
+
 ## Contributing
 
 To report a bug:

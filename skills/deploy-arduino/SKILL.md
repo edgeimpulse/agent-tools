@@ -1,6 +1,8 @@
 ---
 name: deploy-arduino
 description: Write Arduino application code that uses a downloaded Edge Impulse library. Use when asked to write a sketch, integrate an Edge Impulse model into Arduino code, or run inference on an Arduino board.
+metadata:
+  version: "1.0.0"
 ---
 
 Write Arduino sketches that use a downloaded Edge Impulse Arduino library.

@@ -1,6 +1,8 @@
 ---
 name: deploy-zephyr
 description: Integrate Edge Impulse Zephyr Module deployments into Zephyr or Nordic nRF Connect SDK applications, including west manifests, CMake, Kconfig, devicetree sensors, static-buffer inference, clean builds, flashing, and porting across boards. Use for nRF5340 and other Zephyr-supported targets.
+metadata:
+  version: "0.1.0"
 ---
 
 # Edge Impulse Zephyr integration

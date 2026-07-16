@@ -1,6 +1,8 @@
 ---
 name: deploy-linux-cpp
 description: Write C++ application code that uses a downloaded Edge Impulse C++ library on Linux. Use when asked to write a Linux runner, integrate the Edge Impulse SDK into a CMake project, or run inference on a Raspberry Pi or Jetson.
+metadata:
+  version: "0.1.0"
 ---
 
 Write C++ applications that link against a downloaded Edge Impulse C++ library on Linux.
