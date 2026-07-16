@@ -42,3 +42,5 @@ git diff --check
 Do not manually bump `metadata.version` for ordinary edits. After changes land on `main`, `.github/workflows/bump-skill-versions.yml` increments the patch version of each affected skill and commits the result. Repository settings and branch protection must allow GitHub Actions to write to `main`.
 
 In the pull request, describe the source, intended use, overlap analysis, and validation performed.
+
+Every pull request runs `.github/workflows/validate-skills.yml`, which validates all stable and experimental skills with a pinned version of the official reference validator and checks the pull request diff for whitespace errors.

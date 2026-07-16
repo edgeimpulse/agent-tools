@@ -1,0 +1,47 @@
+name: Validate skills
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-skills-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out pull request
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install the Agent Skills reference validator
+        run: >-
+          python -m pip install
+          "git+https://github.com/agentskills/agentskills.git@38a2ff82958afee88dadf4831509e6f7e9d8ef4e#subdirectory=skills-ref"
+
+      - name: Validate all skills
+        shell: bash
+        run: |
+          mapfile -d '' skill_files < <(find skills -type f -name SKILL.md -print0 | sort -z)
+
+          if (( ${#skill_files[@]} == 0 )); then
+            echo "No skills found."
+            exit 1
+          fi
+
+          for skill_file in "${skill_files[@]}"; do
+            skills-ref validate "$(dirname "$skill_file")"
+          done
+
+      - name: Check whitespace errors
+        run: git diff --check "${{ github.event.pull_request.base.sha }}" "${{ github.event.pull_request.head.sha }}"
