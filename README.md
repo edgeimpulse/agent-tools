@@ -8,17 +8,17 @@ This repository is intended for developers and users who want to discover, insta
 
 ## Available skills
 
-| Skill | Purpose | Source |
-| --- | --- | --- |
-| `arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router | [mpous/ai-skills](https://github.com/mpous/ai-skills/tree/main/arduino-router-rpc) |
-| `arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse models, and Flask UIs | [mpous/ai-skills](https://github.com/mpous/ai-skills/tree/main/arduino-unoq-applab) |
-| `edge-impulse-api` | Edge Impulse APIs, CLIs, SDKs, devices, deployments, and custom blocks | [mpous/ai-skills](https://github.com/mpous/ai-skills/tree/main/edge-impulse-api) |
-| `edge-impulse-arduino` | Arduino sketches using exported Edge Impulse libraries | [Edge Impulse documentation](https://docs.edgeimpulse.com/tutorials/topics/ai-agents/create-a-companion-skill) |
-| `edge-impulse-custom-deployment-blocks` | Edge Impulse custom deployment blocks | [Edge Impulse documentation](https://docs.edgeimpulse.com/tutorials/topics/ai-agents/create-a-companion-skill) |
-| `edge-impulse-linux-cpp` | Linux C++ apps using exported Edge Impulse libraries | [Edge Impulse documentation](https://docs.edgeimpulse.com/tutorials/topics/ai-agents/create-a-companion-skill) |
-| `edge-impulse-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models | [Edge Impulse documentation](https://docs.edgeimpulse.com/tutorials/topics/ai-agents/create-a-companion-skill) |
-| `edge-impulse-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration | [Edge Impulse documentation](https://docs.edgeimpulse.com/tutorials/topics/ai-agents/create-a-companion-skill) |
-| `edge-impulse-zephyr` | Zephyr and nRF Connect SDK module integration | [Edge Impulse documentation](https://docs.edgeimpulse.com/tutorials/topics/ai-agents/create-a-companion-skill) |
+| Skill | Purpose |
+| --- | --- |
+| `arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router |
+| `arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse models, and Flask UIs |
+| `edge-impulse-api` | Edge Impulse APIs, CLIs, SDKs, devices, deployments, and custom blocks |
+| `edge-impulse-arduino` | Arduino sketches using exported Edge Impulse libraries |
+| `edge-impulse-custom-deployment-blocks` | Edge Impulse custom deployment blocks |
+| `edge-impulse-linux-cpp` | Linux C++ apps using exported Edge Impulse libraries |
+| `edge-impulse-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models |
+| `edge-impulse-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration |
+| `edge-impulse-zephyr` | Zephyr and nRF Connect SDK module integration |
 
 When two upstream skills target the same goal, this catalog uses the `mpous/ai-skills` version. In particular, `edge-impulse-api` supersedes the documentation's `edge-impulse` example, and `arduino-uno-q-app-lab` supersedes its `ei-app-lab` example.
 
