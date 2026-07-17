@@ -1,5 +1,5 @@
 ---
-name: deploy-zephyr
+name: firmware-zephyr
 description: Integrate Edge Impulse Zephyr Module deployments into Zephyr or Nordic nRF Connect SDK applications, including west manifests, CMake, Kconfig, devicetree sensors, static-buffer inference, clean builds, flashing, and porting across boards. Use for nRF5340 and other Zephyr-supported targets.
 metadata:
   version: "0.1.0"
@@ -83,3 +83,32 @@ Always use a pristine build after replacing the model or changing module revisio
 - Model headers missing: confirm the archive was extracted into `model/` and registered as a module.
 - Sensor not ready: inspect devicetree status, aliases, bus pins, and Kconfig driver symbols.
 - Inaccurate predictions: compare a known Studio window before changing the model.
+
+## Documentation
+
+- https://docs.edgeimpulse.com/hardware/deployments/run-zephyr-module — Zephyr Module deployment
+- https://docs.edgeimpulse.com/hardware/deployments/run-cpp-zephyr-nordic — run the C++ library on Zephyr-based Nordic boards
+
+## Reference repositories
+
+- https://github.com/edgeimpulse/edge-impulse-sdk-zephyr — the Edge Impulse Zephyr module pulled in via west
+- https://github.com/edgeimpulse/example-standalone-inferencing-zephyr — older standalone example that vendors the SDK directly instead of using the module
+
+Official Nordic firmware (complete ingestion and inferencing applications built on Zephyr/NCS):
+
+- https://github.com/edgeimpulse/firmware-nordic-nrf52840dk-nrf5340dk
+- https://github.com/edgeimpulse/firmware-nordic-thingy53
+- https://github.com/edgeimpulse/firmware-nordic-thingy91
+- https://github.com/edgeimpulse/firmware-nordic-nrf9160dk
+- https://github.com/edgeimpulse/firmware-nordic-nrf91x1
+- https://github.com/edgeimpulse/firmware-nordic-nrf7002dk
+- https://github.com/edgeimpulse/firmware-nordic-nrf54l15dk
+- https://github.com/edgeimpulse/firmware-nordic-nrf54lm20-dk
+
+Focused examples:
+
+- https://github.com/edgeimpulse/ei-zephyr-imu-inference — IMU model on devicetree sensor data
+- https://github.com/edgeimpulse/ei-zephyr-mic-kws-inference — keyword spotting on microphone data
+- https://github.com/edgeimpulse/ei-zephyr-thread-inference — threads and message queue for continuous inference
+- https://github.com/edgeimpulse/ei-zephyr-sensors-dataforwarder — stream sensor data over USB CDC to the Edge Impulse data forwarder
+- https://github.com/edgeimpulse/ei-zephyr-ble-gatt-client — BLE GATT client integration
