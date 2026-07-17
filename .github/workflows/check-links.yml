@@ -1,0 +1,39 @@
+name: Check links
+
+on:
+  pull_request:
+  schedule:
+    # Weekly run to catch link rot in repositories and documentation pages.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-links-${{ github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Check links in Markdown files
+        uses: lycheeverse/lychee-action@v2
+        with:
+          # Code blocks and inline code are skipped by default, so API
+          # endpoint examples and placeholder URLs are not checked.
+          # npmjs.com is excluded because it rejects unauthenticated
+          # non-browser requests; 429 is accepted as rate limiting, not rot.
+          args: >-
+            --no-progress
+            --max-retries 3
+            --accept '200..=206,429'
+            --exclude-all-private
+            --exclude 'npmjs\.com'
+            './**/*.md'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
