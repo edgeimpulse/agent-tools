@@ -10,9 +10,9 @@ This repository is intended for developers and users who want to discover, insta
 
 | Skill | Purpose |
 | --- | --- |
-| `api` | Edge Impulse APIs, CLIs, SDKs, devices, deployments, and custom blocks |
-| `build-arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse models, and Flask UIs |
-| `firmware-arduino` | Arduino sketches using exported Edge Impulse libraries |
+| `api` | Edge Impulse APIs, CLIs, & SDKs |
+| `build-arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse model integration, and Flask UIs |
+| `firmware-arduino` | Arduino sketches, Edge Impulse library integration |
 | `build-custom-deployment-blocks` | Edge Impulse custom deployment blocks |
 
 ## Experimental skills
@@ -59,11 +59,11 @@ npx skills remove <skill-name>
 
 The lifecycle directories are repository conventions rather than Agent Skills frontmatter fields:
 
+- Stable skills live under `skills/`
+  - Backwards compatibility is expected.
 - Experimental skills live under `skills/.experimental/`
   - They may change or be removed.
   - They are suitable for early adopters and feedback.
-- Stable skills live under `skills/`
-  - Backwards compatibility is expected.
 - Deprecated skills live under `skills/.deprecated/`.
 
 ## Skill versions
