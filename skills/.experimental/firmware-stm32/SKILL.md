@@ -1,5 +1,5 @@
 ---
-name: deploy-stm32
+name: firmware-stm32
 description: Integrate an exported Edge Impulse C++ library into STM32CubeIDE projects, including STM32H7 and FreeRTOS applications, sensor sampling, ISR-safe buffering, classifier tasks, linker and memory configuration, and STM32 SDK porting. Use when writing or debugging Edge Impulse inference firmware for STM32 microcontrollers.
 metadata:
   version: "0.1.0"
@@ -81,3 +81,19 @@ Handle classification, object detection, and anomaly outputs according to the ge
 2. Then test live sensor input, checking sample interval, units, axis order, and buffer completeness.
 3. Run long enough to detect stack overflow, queue overrun, timing drift, or DMA/cache faults.
 4. Perform a clean CubeIDE rebuild before reporting success.
+
+## Documentation
+
+- https://docs.edgeimpulse.com/hardware/deployments/run-cubemx — run a Cube.MX CMSIS-Pack deployment in STM32 projects
+- https://docs.edgeimpulse.com/hardware/boards/stm32n6570-dk — STM32N6570-DK board guide
+
+## Reference repositories
+
+- https://github.com/edgeimpulse/example-standalone-inferencing-stm32h747i-disco — standalone inferencing on the STM32H747I-DISCO
+- https://github.com/edgeimpulse/firmware-st-stm32n6 — official ingestion and inferencing firmware for the STM32N6570-DK
+- https://github.com/edgeimpulse/example-standalone-st-stm32n6 — standalone inferencing for the STM32N6570-DK
+
+Other toolchains (not CubeIDE):
+
+- https://github.com/edgeimpulse/example-standalone-inferencing-stm32f4-csolution — STM32F4 Nucleo using the CMSIS toolbox
+- https://github.com/edgeimpulse/example-standalone-inferencing-st-nucleo-f466re — Nucleo F466RE using Keil MDK

@@ -844,3 +844,13 @@ export EI_PROJECT_ID="12345"
 | List samples | `GET /api/{projectId}/raw-data` |
 | List devices | `GET /api/{projectId}/devices` |
 | Deployment targets | `GET /api/deployment/targets` |
+
+## Source Repositories
+
+- https://github.com/edgeimpulse/edge-impulse-cli — CLI tools (daemon, uploader, data forwarder, run-impulse, blocks)
+- https://github.com/edgeimpulse/edge-impulse-linux-cli — Linux CLI and EIM impulse runner
+- https://github.com/edgeimpulse/python-sdk — Edge Impulse Python SDK for programmatic platform workflows
+- https://github.com/edgeimpulse/linux-sdk-python — `edge_impulse_linux` Python SDK for EIM inference
+- https://github.com/edgeimpulse/linux-sdk-go — Go SDK for Linux EIM models
+- https://github.com/edgeimpulse/inferencing-sdk-cpp — portable C++ inferencing SDK
+- https://github.com/edgeimpulse/ingestion-sdk-c — C99 header-only ingestion SDK for embedded data collection

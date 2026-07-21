@@ -1,5 +1,5 @@
 ---
-name: deploy-arduino
+name: firmware-arduino
 description: Write Arduino application code that uses a downloaded Edge Impulse library. Use when asked to write a sketch, integrate an Edge Impulse model into Arduino code, or run inference on an Arduino board.
 metadata:
   version: "1.0.0"
@@ -65,3 +65,21 @@ Use whatever filename that command returns — do not guess or hardcode it.
 3. Collect sensor data at EI_CLASSIFIER_INTERVAL_MS intervals.
 4. Ask the user which sensor they are using (IMU, microphone, or camera) if not specified.
 5. Use the Arduino Wire, SPI, or sensor-specific libraries appropriate for the board.
+
+## Documentation
+
+- https://docs.edgeimpulse.com/hardware/deployments/run-arduino-2-0 — run an Arduino library deployment with the Arduino IDE
+
+## Reference repositories
+
+Official Edge Impulse Arduino firmware — complete, board-specific ingestion and inferencing implementations to reference for sensor integration patterns:
+
+- https://github.com/edgeimpulse/firmware-arduino-nano-33-ble-sense — Nano 33 BLE Sense (IMU, microphone)
+- https://github.com/edgeimpulse/firmware-arduino-nicla-vision — Nicla Vision (camera)
+- https://github.com/edgeimpulse/firmware-arduino-nicla-voice — Nicla Voice (audio, Syntiant NDP)
+- https://github.com/edgeimpulse/firmware-arduino-portenta-h7 — Portenta H7 (camera)
+
+Application sketch examples:
+
+- https://github.com/edgeimpulse/example-nesso-n1-smart-door-sensor — accelerometer ingestion and inference on the Arduino Nesso N1 over WiFi and Zigbee, using deep sleep
+- https://github.com/edgeimpulse/example-portenta-lorawan — computer vision over LoRaWAN with the Portenta H7

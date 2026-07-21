@@ -5,9 +5,10 @@ Follow the [Agent Skills specification](https://agentskills.io/specification) fo
 ## Repository conventions
 
 1. Put stable skills in `skills/<skill-name>/`, experimental skills in `skills/.experimental/<skill-name>/`, and deprecated skills in `skills/.deprecated/<skill-name>/`.
-2. Use action-oriented prefixes: `deploy-` for deployment workflows and `build-` for build and integration workflows; use the exact name `api` for Edge Impulse platform integrations. Follow the action with the relevant platform or tool, such as `build-arduino-`. Spell product names as kebab-case components, such as `uno-q`, `app-lab`, and `raspberry-pi`; add `-cpp` or `-python` when the language distinguishes the workflow.
+2. Use action-oriented prefixes: `firmware-` for skills that integrate exported Edge Impulse models into device or application code and `build-` for build and integration workflows; use the exact name `api` for Edge Impulse platform integrations. Follow the prefix with the relevant platform, tool, or language, such as `build-arduino-` or `firmware-stm32`. Spell product names as kebab-case components, such as `uno-q`, `app-lab`, and `raspberry-pi`; add `-cpp` or `-python` when the language distinguishes the workflow.
 3. Add or update the skill's entry in the catalog table in `README.md`.
 4. Do not import third-party content without redistribution permission. Record distinct license terms in the skill as described by the Agent Skills specification.
+5. When a skill links reference repositories (example projects, official firmware, SDK sources), link repositories from the official [edgeimpulse GitHub organization](https://github.com/edgeimpulse). Confirm each repository is public and not archived before linking — private repositories return 404 for catalog users. Link a third-party repository only when it is the canonical upstream for the platform (for example, Arduino or Zephyr documentation). Add the links as a `## Reference repositories` section in `SKILL.md` — or to the resources list in `references/REFERENCE.md` when the skill has one — with a one-line note on when to consult each repository. Likewise link the relevant [docs.edgeimpulse.com](https://docs.edgeimpulse.com) pages in a `## Documentation` section, and confirm every URL resolves before submitting.
 
 ## Validate changes
 

@@ -1,5 +1,5 @@
 ---
-name: deploy-raspberry-pi-python
+name: firmware-raspberry-pi-python
 description: Run Edge Impulse EIM models on Raspberry Pi and other Linux systems with the edge_impulse_linux Python SDK. Use when building Python inference loops for custom sensors, images, video, USB microphones, audio classification, keyword spotting, or when debugging ImpulseRunner and AudioImpulseRunner applications.
 metadata:
   version: "0.1.0"
@@ -81,3 +81,16 @@ Do not assume scores sum to one for every model type.
 1. Run a known Studio sample through the local pipeline.
 2. Compare the scores and preprocessing assumptions.
 3. Exercise continuous capture for several minutes while checking memory, latency, dropped frames, and clean shutdown.
+
+## Documentation
+
+- https://docs.edgeimpulse.com/tools/libraries/sdks/inference/linux/python — Linux Python SDK
+- https://docs.edgeimpulse.com/hardware/deployments/run-linux-eim — Linux EIM deployment
+- https://docs.edgeimpulse.com/tools/clis/edge-impulse-linux-cli — Edge Impulse Linux CLI
+
+## Reference repositories
+
+- https://github.com/edgeimpulse/linux-sdk-python — source of `edge_impulse_linux` and the canonical runner examples
+- https://github.com/edgeimpulse/edge-impulse-linux-cli — Linux CLI used to download and run EIM models
+- https://github.com/edgeimpulse/example-multi-impulse-python — Flask app running multiple impulses (object detection and visual anomaly detection)
+- https://github.com/edgeimpulse/example-active-learning-linux-python-sdk — active-learning workflow with the Linux Python SDK

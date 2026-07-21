@@ -10,9 +10,9 @@ This repository is intended for developers and users who want to discover, insta
 
 | Skill | Purpose |
 | --- | --- |
-| `api` | Edge Impulse APIs, CLIs, SDKs, devices, deployments, and custom blocks |
-| `build-arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse models, and Flask UIs |
-| `deploy-arduino` | Arduino sketches using exported Edge Impulse libraries |
+| `api` | Edge Impulse APIs, CLIs, & SDKs |
+| `build-arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse model integration, and Flask UIs |
+| `firmware-arduino` | Arduino sketches, Edge Impulse library integration |
 | `build-custom-deployment-blocks` | Edge Impulse custom deployment blocks |
 
 ## Experimental skills
@@ -20,10 +20,10 @@ This repository is intended for developers and users who want to discover, insta
 | Skill | Purpose |
 | --- | --- |
 | `build-arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router |
-| `deploy-linux-cpp` | Linux C++ apps using exported Edge Impulse libraries |
-| `deploy-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models |
-| `deploy-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration |
-| `deploy-zephyr` | Zephyr and nRF Connect SDK module integration |
+| `firmware-cpp` | Desktop, Linux, and generic MCU C++ apps using exported Edge Impulse libraries |
+| `firmware-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models |
+| `firmware-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration |
+| `firmware-zephyr` | Zephyr and nRF Connect SDK module integration |
 
 ## Installing and removing skills
 
@@ -59,11 +59,11 @@ npx skills remove <skill-name>
 
 The lifecycle directories are repository conventions rather than Agent Skills frontmatter fields:
 
+- Stable skills live under `skills/`
+  - Backwards compatibility is expected.
 - Experimental skills live under `skills/.experimental/`
   - They may change or be removed.
   - They are suitable for early adopters and feedback.
-- Stable skills live under `skills/`
-  - Backwards compatibility is expected.
 - Deprecated skills live under `skills/.deprecated/`.
 
 ## Skill versions
