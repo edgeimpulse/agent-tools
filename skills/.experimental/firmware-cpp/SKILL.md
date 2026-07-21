@@ -2,7 +2,7 @@
 name: firmware-cpp
 description: Write C++ application code that uses a downloaded Edge Impulse C++ library, covering both the portable "C++ library" and the hardware-accelerated "C++ library (Linux)" Studio deployment options. Use for desktop or Linux applications, CMake integration, or porting the library into a generic MCU or custom C++ build system. For Arduino, STM32CubeIDE, or Zephyr targets, prefer the dedicated firmware-arduino, firmware-stm32, and firmware-zephyr skills.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 Write C++ applications that use a downloaded Edge Impulse C++ library on desktop, Linux, or generic MCU targets.
