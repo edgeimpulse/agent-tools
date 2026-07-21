@@ -2,7 +2,7 @@
 name: build-arduino-uno-q-app-lab
 description: Adapt applications for Arduino UNO Q and Arduino App Lab as apps or reusable bricks, integrate Edge Impulse EIM models, connect the Linux MPU and STM32 MCU through RouterBridge, and build Flask web UIs. Use for UNO Q development, App Lab manifests and CLI workflows, model deployment, camera apps, or porting existing projects into App Lab.
 metadata:
-  version: "1.0.0"
+  version: "1.0.1"
 ---
 
 # Arduino UNO Q and App Lab
