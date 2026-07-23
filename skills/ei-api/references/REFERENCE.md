@@ -144,10 +144,57 @@ The Studio API exposes most Studio functionality programmatically. All endpoints
 | POST | `/api/{projectId}/raw-data/{sampleId}/segment` | Segment sample |
 | POST | `/api/{projectId}/raw-data/{sampleId}/find-segments` | Auto-detect segments |
 | POST | `/api/{projectId}/raw-data/{sampleId}/bounding-boxes` | Set object detection bounding boxes |
+| POST | `/api/{projectId}/raw-data/{sampleId}/structured-labels` | Set multi-label time-segmented labels |
 | POST | `/api/{projectId}/rebalance` | Rebalance train/test split |
 | POST | `/api/{projectId}/raw-data/delete-all` | Delete all samples |
 | POST | `/api/{projectId}/raw-data/delete-all/{category}` | Delete all in category |
 | GET | `/api/{projectId}/raw-data/label-object-detection-queue` | OD labeling queue |
+
+#### Multi-label Samples (Structured Labels) & Large Sample Options
+
+##### Listing & Fetching Options
+- **Query parameters when listing samples** (`GET /api/{projectId}/raw-data`):
+  - `category`: `training`, `testing`, or `anomaly`
+  - `limit`: number of samples per page
+  - `offset`: pagination offset
+  - `labels`: filter by label name(s)
+- **Single-label Relabeling**:
+  - `POST /api/{projectId}/raw-data/{sampleId}/rename` body: `{ "newLabel": "label" }`
+  - `POST /api/{projectId}/raw-data/{sampleId}/edit-label` body: `{ "label": "label" }`
+- **Large Sample Downsampling**:
+  - `GET /api/{projectId}/raw-data/{sampleId}?limitPayloadValues=N` downsamples the payload to ~N values server-side.
+  - The response's `totalPayloadLength` still reports the true reading count.
+  - `intervalMs` is fixed and is not affected by `limitPayloadValues`.
+
+##### Multi-label Mechanics (Structured Labels)
+A sample can carry **time-segmented labels** instead of a single label for the entire sample (e.g., the first second is `idle`, the next two are `walk`).
+
+These come back on the `Sample` object from both list (`GET /api/{projectId}/raw-data`) and single sample (`GET /api/{projectId}/raw-data/{sampleId}`) endpoints:
+
+```jsonc
+{
+  "label": "idle",                      // summary / first label (single-label field)
+  "structuredLabelsList": ["idle", "walk"],   // distinct labels present
+  "structuredLabels": [
+    { "startIndex": 0,   "endIndex": 99,  "label": "idle" },  // endIndex is INCLUSIVE
+    { "startIndex": 100, "endIndex": 299, "label": "walk" }
+  ]
+}
+```
+
+- **Inclusive End Index**: `endIndex` is **inclusive** — `{ startIndex: 0, endIndex: 3 }` covers indices 0, 1, 2, and 3.
+- **Time Code Calculation**: Convert index to time code in milliseconds by multiplying by `intervalMs`: `timeMs = index * intervalMs`.
+- **Multi-label Condition**: Treat a sample as multi-label when it contains two or more segments (`structuredLabels` length $\ge 2$).
+- **Truncation Control**: `GET /api/{projectId}/raw-data/{sampleId}?truncateStructuredLabels=false` (the default) returns all segments; pass `true` to get only a slice.
+- **Writing Structured Labels**: Set multi-label segments via `POST /api/{projectId}/raw-data/{sampleId}/structured-labels`:
+  ```json
+  {
+    "structuredLabels": [
+      { "startIndex": 0, "endIndex": 99, "label": "idle" },
+      { "startIndex": 100, "endIndex": 299, "label": "walk" }
+    ]
+  }
+  ```
 
 ### Devices
 
@@ -738,6 +785,20 @@ curl -X POST \
   "https://studio.edgeimpulse.com/v1/api/$PROJECT_ID/raw-data/$SAMPLE_ID/edit-label"
 ```
 
+### Recipe: Set multi-label structured labels
+```bash
+curl -X POST \
+  -H "x-api-key: $API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "structuredLabels": [
+      {"startIndex": 0, "endIndex": 99, "label": "idle"},
+      {"startIndex": 100, "endIndex": 299, "label": "walk"}
+    ]
+  }' \
+  "https://studio.edgeimpulse.com/v1/api/$PROJECT_ID/raw-data/$SAMPLE_ID/structured-labels"
+```
+
 ### Recipe: Delete all samples
 ```bash
 curl -X POST -H "x-jwt-token: $JWT" \
@@ -819,6 +880,27 @@ for s in samples:
     print(f"  {s['id']}: {s['label']} ({s['filename']})")
 ```
 
+### Recipe: Python — Set multi-label structured labels
+```python
+import requests
+
+API_KEY = "ei_abc123..."
+PROJECT_ID = 12345
+SAMPLE_ID = 67890
+
+resp = requests.post(
+    f"https://studio.edgeimpulse.com/v1/api/{PROJECT_ID}/raw-data/{SAMPLE_ID}/structured-labels",
+    headers={"x-api-key": API_KEY, "Content-Type": "application/json"},
+    json={
+        "structuredLabels": [
+            {"startIndex": 0, "endIndex": 99, "label": "idle"},
+            {"startIndex": 100, "endIndex": 299, "label": "walk"},
+        ]
+    },
+)
+print(resp.json())
+```
+
 ### Environment Variable Convention
 ```bash
 export EI_API_KEY="ei_abc123..."
@@ -842,6 +924,7 @@ export EI_PROJECT_ID="12345"
 | List projects | `GET /api/projects` |
 | Upload data | `POST ingestion.edgeimpulse.com/api/training/files` |
 | List samples | `GET /api/{projectId}/raw-data` |
+| Set multi-label segments | `POST /api/{projectId}/raw-data/{sampleId}/structured-labels` |
 | List devices | `GET /api/{projectId}/devices` |
 | Deployment targets | `GET /api/deployment/targets` |
 
