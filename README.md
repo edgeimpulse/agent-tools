@@ -20,6 +20,7 @@ This repository is intended for developers and users who want to discover, insta
 | Skill | Purpose |
 | --- | --- |
 | `build-arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router |
+| `build-custom-learning-blocks` | Edge Impulse custom learning blocks (custom ML training containers) |
 | `firmware-cpp` | Desktop, Linux, and generic MCU C++ apps using exported Edge Impulse libraries |
 | `firmware-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models |
 | `firmware-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration |
