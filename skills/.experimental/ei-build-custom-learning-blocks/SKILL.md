@@ -2,7 +2,7 @@
 name: ei-build-custom-learning-blocks
 description: Author Edge Impulse custom learning blocks (custom ML blocks). Use when asked to scaffold, modify, test, or push a custom learning block — including the training container Dockerfile, parameters.json for machine-learning blocks, train scripts that read X/Y npy splits and write model artifacts (saved_model.zip, model.onnx, TFLite, model.pkl), and the edge-impulse-blocks CLI init/runner/push workflow.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 Help the user author an Edge Impulse custom learning block. A learning block is a Docker container that Studio runs to train a model on the features produced by the input and processing (DSP) blocks. Any framework and language work — the contract is only the CLI arguments in, and model files written to the output directory.

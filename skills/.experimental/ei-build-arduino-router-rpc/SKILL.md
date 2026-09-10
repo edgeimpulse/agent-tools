@@ -2,7 +2,7 @@
 name: ei-build-arduino-router-rpc
 description: Interact with the arduino-router daemon on Arduino UNO Q using MessagePack RPC. Use when creating custom C++, Python, or other clients for Linux MPU to STM32 MCU communication without the Arduino App Lab Python Bridge API.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 # Arduino Router RPC
