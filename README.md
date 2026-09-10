@@ -54,6 +54,22 @@ Install specific skills by name. `--skill` accepts more than one name:
 npx skills add edgeimpulse/agent-tools --skill ei-api --skill ei-firmware-arduino
 ```
 
+### Install everything
+
+`--all` installs the entire catalog to every agent it detects, with no prompts:
+
+```bash
+npx skills add edgeimpulse/agent-tools --all
+```
+
+This installs the experimental skills too, not just the stable ones. To take the whole catalog but keep control of the target, pass `'*'` to `--skill` and name the agents yourself:
+
+```bash
+npx skills add edgeimpulse/agent-tools --skill '*' --agent claude-code --yes
+```
+
+Both forms install into the current project by default. Add `-g` to install the catalog globally instead.
+
 ### Choose an installation scope
 
 Scope decides which projects see the skill. Use global for skills you want everywhere, and the default project scope for skills that belong to one repository.
