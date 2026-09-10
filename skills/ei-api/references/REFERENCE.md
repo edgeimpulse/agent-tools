@@ -154,20 +154,20 @@ The Studio API exposes most Studio functionality programmatically. All endpoints
 
 ##### Listing & Fetching Options
 - **Query parameters when listing samples** (`GET /api/{projectId}/raw-data`):
-  - `category`: `training`, `testing`, or `anomaly`
+  - `category` (**required**): one of `training`, `testing`, `validation`, `post-processing`, `all`
   - `limit`: number of samples per page
   - `offset`: pagination offset
-  - `labels`: filter by label name(s)
-- **Single-label Relabeling**:
-  - `POST /api/{projectId}/raw-data/{sampleId}/rename` body: `{ "newLabel": "label" }`
-  - `POST /api/{projectId}/raw-data/{sampleId}/edit-label` body: `{ "label": "label" }`
+  - `labels`: only include samples whose label is in the given list, passed as a **JSON-encoded string**, for example `labels=["idle","snake"]`
+- **Renaming vs. relabeling** — these two endpoints are easy to confuse:
+  - `POST /api/{projectId}/raw-data/{sampleId}/rename` sets the sample's **file name**, not its label. Body: `{ "name": "faulty-machine2.A3de" }`
+  - `POST /api/{projectId}/raw-data/{sampleId}/edit-label` sets the sample's **label** (class). Body: `{ "label": "label" }`
 - **Large Sample Downsampling**:
   - `GET /api/{projectId}/raw-data/{sampleId}?limitPayloadValues=N` downsamples the payload to ~N values server-side.
-  - The response's `totalPayloadLength` still reports the true reading count.
+  - The response's `totalPayloadLength` still reports the true reading count. It sits on the response envelope alongside `sample` and `payload`, not inside the `Sample` object, and it is only returned by the single-sample endpoint.
   - `intervalMs` is fixed and is not affected by `limitPayloadValues`.
 
 ##### Multi-label Mechanics (Structured Labels)
-A sample can carry **time-segmented labels** instead of a single label for the entire sample (e.g., the first second is `idle`, the next two are `walk`).
+A sample can carry **time-segmented labels** instead of a single label for the entire sample (e.g., the first second is `idle`, the next two are `walk`). When a sample has structured labels, its `label` field is ignored.
 
 These come back on the `Sample` object from both list (`GET /api/{projectId}/raw-data`) and single sample (`GET /api/{projectId}/raw-data/{sampleId}`) endpoints:
 
@@ -184,9 +184,9 @@ These come back on the `Sample` object from both list (`GET /api/{projectId}/raw
 
 - **Inclusive End Index**: `endIndex` is **inclusive** — `{ startIndex: 0, endIndex: 3 }` covers indices 0, 1, 2, and 3.
 - **Time Code Calculation**: Convert index to time code in milliseconds by multiplying by `intervalMs`: `timeMs = index * intervalMs`.
-- **Multi-label Condition**: Treat a sample as multi-label when it contains two or more segments (`structuredLabels` length $\ge 2$).
-- **Truncation Control**: `GET /api/{projectId}/raw-data/{sampleId}?truncateStructuredLabels=false` (the default) returns all segments; pass `true` to get only a slice.
-- **Writing Structured Labels**: Set multi-label segments via `POST /api/{projectId}/raw-data/{sampleId}/structured-labels`:
+- **Multi-label Condition**: Treat a sample as multi-label when it contains two or more segments (`structuredLabels` length >= 2).
+- **Truncation Control**: pass `GET /api/{projectId}/raw-data/{sampleId}?truncateStructuredLabels=true` to return only a slice of the labels for samples with many segments. Omit it to get the full set.
+- **Writing Structured Labels**: Set multi-label segments via `POST /api/{projectId}/raw-data/{sampleId}/structured-labels`. The array must cover the **complete sample** — use the sample's `valuesCount` as the upper bound. A gapped or partial array returns an error:
   ```json
   {
     "structuredLabels": [
