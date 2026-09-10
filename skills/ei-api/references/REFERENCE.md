@@ -144,10 +144,57 @@ The Studio API exposes most Studio functionality programmatically. All endpoints
 | POST | `/api/{projectId}/raw-data/{sampleId}/segment` | Segment sample |
 | POST | `/api/{projectId}/raw-data/{sampleId}/find-segments` | Auto-detect segments |
 | POST | `/api/{projectId}/raw-data/{sampleId}/bounding-boxes` | Set object detection bounding boxes |
+| POST | `/api/{projectId}/raw-data/{sampleId}/structured-labels` | Set multi-label time-segmented labels |
 | POST | `/api/{projectId}/rebalance` | Rebalance train/test split |
 | POST | `/api/{projectId}/raw-data/delete-all` | Delete all samples |
 | POST | `/api/{projectId}/raw-data/delete-all/{category}` | Delete all in category |
 | GET | `/api/{projectId}/raw-data/label-object-detection-queue` | OD labeling queue |
+
+#### Multi-label Samples (Structured Labels) & Large Sample Options
+
+##### Listing & Fetching Options
+- **Query parameters when listing samples** (`GET /api/{projectId}/raw-data`):
+  - `category` (**required**): one of `training`, `testing`, `validation`, `post-processing`, `all`
+  - `limit`: number of samples per page
+  - `offset`: pagination offset
+  - `labels`: only include samples whose label is in the given list, passed as a **JSON-encoded string**, for example `labels=["idle","snake"]`
+- **Renaming vs. relabeling** — these two endpoints are easy to confuse:
+  - `POST /api/{projectId}/raw-data/{sampleId}/rename` sets the sample's **file name**, not its label. Body: `{ "name": "faulty-machine2.A3de" }`
+  - `POST /api/{projectId}/raw-data/{sampleId}/edit-label` sets the sample's **label** (class). Body: `{ "label": "label" }`
+- **Large Sample Downsampling**:
+  - `GET /api/{projectId}/raw-data/{sampleId}?limitPayloadValues=N` downsamples the payload to ~N values server-side.
+  - The response's `totalPayloadLength` still reports the true reading count. It sits on the response envelope alongside `sample` and `payload`, not inside the `Sample` object, and it is only returned by the single-sample endpoint.
+  - `intervalMs` is fixed and is not affected by `limitPayloadValues`.
+
+##### Multi-label Mechanics (Structured Labels)
+A sample can carry **time-segmented labels** instead of a single label for the entire sample (e.g., the first second is `idle`, the next two are `walk`). When a sample has structured labels, its `label` field is ignored.
+
+These come back on the `Sample` object from both list (`GET /api/{projectId}/raw-data`) and single sample (`GET /api/{projectId}/raw-data/{sampleId}`) endpoints:
+
+```jsonc
+{
+  "label": "idle",                      // summary / first label (single-label field)
+  "structuredLabelsList": ["idle", "walk"],   // distinct labels present
+  "structuredLabels": [
+    { "startIndex": 0,   "endIndex": 99,  "label": "idle" },  // endIndex is INCLUSIVE
+    { "startIndex": 100, "endIndex": 299, "label": "walk" }
+  ]
+}
+```
+
+- **Inclusive End Index**: `endIndex` is **inclusive** — `{ startIndex: 0, endIndex: 3 }` covers indices 0, 1, 2, and 3.
+- **Time Code Calculation**: Convert index to time code in milliseconds by multiplying by `intervalMs`: `timeMs = index * intervalMs`.
+- **Multi-label Condition**: Treat a sample as multi-label when it contains two or more segments (`structuredLabels` length >= 2).
+- **Truncation Control**: pass `GET /api/{projectId}/raw-data/{sampleId}?truncateStructuredLabels=true` to return only a slice of the labels for samples with many segments. Omit it to get the full set.
+- **Writing Structured Labels**: Set multi-label segments via `POST /api/{projectId}/raw-data/{sampleId}/structured-labels`. The array must cover the **complete sample** — use the sample's `valuesCount` as the upper bound. A gapped or partial array returns an error:
+  ```json
+  {
+    "structuredLabels": [
+      { "startIndex": 0, "endIndex": 99, "label": "idle" },
+      { "startIndex": 100, "endIndex": 299, "label": "walk" }
+    ]
+  }
+  ```
 
 ### Devices
 
@@ -738,6 +785,20 @@ curl -X POST \
   "https://studio.edgeimpulse.com/v1/api/$PROJECT_ID/raw-data/$SAMPLE_ID/edit-label"
 ```
 
+### Recipe: Set multi-label structured labels
+```bash
+curl -X POST \
+  -H "x-api-key: $API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "structuredLabels": [
+      {"startIndex": 0, "endIndex": 99, "label": "idle"},
+      {"startIndex": 100, "endIndex": 299, "label": "walk"}
+    ]
+  }' \
+  "https://studio.edgeimpulse.com/v1/api/$PROJECT_ID/raw-data/$SAMPLE_ID/structured-labels"
+```
+
 ### Recipe: Delete all samples
 ```bash
 curl -X POST -H "x-jwt-token: $JWT" \
@@ -819,6 +880,27 @@ for s in samples:
     print(f"  {s['id']}: {s['label']} ({s['filename']})")
 ```
 
+### Recipe: Python — Set multi-label structured labels
+```python
+import requests
+
+API_KEY = "ei_abc123..."
+PROJECT_ID = 12345
+SAMPLE_ID = 67890
+
+resp = requests.post(
+    f"https://studio.edgeimpulse.com/v1/api/{PROJECT_ID}/raw-data/{SAMPLE_ID}/structured-labels",
+    headers={"x-api-key": API_KEY, "Content-Type": "application/json"},
+    json={
+        "structuredLabels": [
+            {"startIndex": 0, "endIndex": 99, "label": "idle"},
+            {"startIndex": 100, "endIndex": 299, "label": "walk"},
+        ]
+    },
+)
+print(resp.json())
+```
+
 ### Environment Variable Convention
 ```bash
 export EI_API_KEY="ei_abc123..."
@@ -842,6 +924,7 @@ export EI_PROJECT_ID="12345"
 | List projects | `GET /api/projects` |
 | Upload data | `POST ingestion.edgeimpulse.com/api/training/files` |
 | List samples | `GET /api/{projectId}/raw-data` |
+| Set multi-label segments | `POST /api/{projectId}/raw-data/{sampleId}/structured-labels` |
 | List devices | `GET /api/{projectId}/devices` |
 | Deployment targets | `GET /api/deployment/targets` |
 
