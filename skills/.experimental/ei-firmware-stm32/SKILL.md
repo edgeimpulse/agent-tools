@@ -1,5 +1,5 @@
 ---
-name: firmware-stm32
+name: ei-firmware-stm32
 description: Integrate an exported Edge Impulse C++ library into STM32CubeIDE projects, including STM32H7 and FreeRTOS applications, sensor sampling, ISR-safe buffering, classifier tasks, linker and memory configuration, and STM32 SDK porting. Use when writing or debugging Edge Impulse inference firmware for STM32 microcontrollers.
 metadata:
   version: "0.1.1"

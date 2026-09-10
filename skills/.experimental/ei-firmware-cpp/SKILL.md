@@ -1,6 +1,6 @@
 ---
-name: firmware-cpp
-description: Write C++ application code that uses a downloaded Edge Impulse C++ library, covering both the portable "C++ library" and the hardware-accelerated "C++ library (Linux)" Studio deployment options. Use for desktop or Linux applications, CMake integration, or porting the library into a generic MCU or custom C++ build system. For Arduino, STM32CubeIDE, or Zephyr targets, prefer the dedicated firmware-arduino, firmware-stm32, and firmware-zephyr skills.
+name: ei-firmware-cpp
+description: Write C++ application code that uses a downloaded Edge Impulse C++ library, covering both the portable "C++ library" and the hardware-accelerated "C++ library (Linux)" Studio deployment options. Use for desktop or Linux applications, CMake integration, or porting the library into a generic MCU or custom C++ build system. For Arduino, STM32CubeIDE, or Zephyr targets, prefer the dedicated ei-firmware-arduino, ei-firmware-stm32, and ei-firmware-zephyr skills.
 metadata:
   version: "0.1.1"
 ---
@@ -103,7 +103,7 @@ When the target has no CMake support, integrate the portable library into the ex
 4. Ask the user what platform they are targeting (desktop, Linux SBC, or MCU) and what input source they are using (CSV file, live camera, microphone, sensor, etc.) if not specified.
 5. For camera input on desktop or Linux, use OpenCV to capture frames and convert to the expected format.
 6. On desktop, build for the native architecture. For Linux SBCs, target ARM64 by default unless the user specifies otherwise.
-7. For Arduino, STM32CubeIDE, or Zephyr projects, use the dedicated firmware-arduino, firmware-stm32, or firmware-zephyr skill instead of this generic integration.
+7. For Arduino, STM32CubeIDE, or Zephyr projects, use the dedicated ei-firmware-arduino, ei-firmware-stm32, or ei-firmware-zephyr skill instead of this generic integration.
 
 ## Documentation
 

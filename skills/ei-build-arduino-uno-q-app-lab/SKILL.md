@@ -1,5 +1,5 @@
 ---
-name: build-arduino-uno-q-app-lab
+name: ei-build-arduino-uno-q-app-lab
 description: Adapt applications for Arduino UNO Q and Arduino App Lab as apps or reusable bricks, integrate Edge Impulse EIM models, connect the Linux MPU and STM32 MCU through RouterBridge, and build Flask web UIs. Use for UNO Q development, App Lab manifests and CLI workflows, model deployment, camera apps, or porting existing projects into App Lab.
 metadata:
   version: "1.0.1"
@@ -14,7 +14,7 @@ Use the detailed [reference](references/REFERENCE.md) selectively. Check current
 - For hardware, execution modes, paths, or setup, read **Arduino UNO Q Hardware** and **Arduino App Lab Overview**.
 - For a new or modified app, read **App Structure & Configuration** and **App Lab CLI Reference**.
 - For reusable bricks, read **Bricks System**.
-- For MCU/MPU communication, read **Bridge: MCU-MPU Communication**. Use the separate `build-arduino-router-rpc` skill for raw MessagePack clients.
+- For MCU/MPU communication, read **Bridge: MCU-MPU Communication**. Use the separate `ei-build-arduino-router-rpc` skill for raw MessagePack clients.
 - For the LED matrix, read **LED Matrix Control** and **Complete Example: Python to LED Matrix via Bridge**.
 - For Edge Impulse, read **Deploying Edge Impulse ML Models**. Prefer an EIM model on the Linux MPU.
 - For Flask or camera work, read **Building Flask Web Apps**, **Camera & Video Handling**, and the reference example.
