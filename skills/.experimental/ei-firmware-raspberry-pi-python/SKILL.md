@@ -2,7 +2,7 @@
 name: ei-firmware-raspberry-pi-python
 description: Run Edge Impulse EIM models on Raspberry Pi and other Linux systems with the edge_impulse_linux Python SDK. Use when building Python inference loops for custom sensors, images, video, USB microphones, audio classification, keyword spotting, or when debugging ImpulseRunner and AudioImpulseRunner applications.
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
 ---
 
 # Edge Impulse Python on Raspberry Pi

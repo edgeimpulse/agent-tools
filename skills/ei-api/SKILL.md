@@ -2,7 +2,7 @@
 name: ei-api
 description: Work with the Edge Impulse Studio, Ingestion, and Remote Management APIs; CLI tools; Linux runners; SDKs; and custom blocks. Use for project and sample management, data upload, model training and testing, deployment builds, device control, job monitoring, automation, or any programmatic Edge Impulse platform integration.
 metadata:
-  version: "1.0.1"
+  version: "1.0.2"
 ---
 
 # Edge Impulse API and ecosystem

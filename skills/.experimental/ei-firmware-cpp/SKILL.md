@@ -2,7 +2,7 @@
 name: ei-firmware-cpp
 description: Write C++ application code that uses a downloaded Edge Impulse C++ library, covering both the portable "C++ library" and the hardware-accelerated "C++ library (Linux)" Studio deployment options. Use for desktop or Linux applications, CMake integration, or porting the library into a generic MCU or custom C++ build system. For Arduino, STM32CubeIDE, or Zephyr targets, prefer the dedicated ei-firmware-arduino, ei-firmware-stm32, and ei-firmware-zephyr skills.
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
 ---
 
 Write C++ applications that use a downloaded Edge Impulse C++ library on desktop, Linux, or generic MCU targets.
