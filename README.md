@@ -6,54 +6,97 @@ Agent Skills are reusable building blocks that help agents interact with Edge Im
 
 This repository is intended for developers and users who want to discover, install, and use skills. Every skill follows the [Agent Skills specification](https://agentskills.io/specification).
 
+All skill names are prefixed with `ei-` so they stay identifiable once installed alongside skills from other catalogs.
+
 ## Stable skills
 
 | Skill | Purpose |
 | --- | --- |
-| `api` | Edge Impulse APIs, CLIs, & SDKs |
-| `build-arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse model integration, and Flask UIs |
-| `firmware-arduino` | Arduino sketches, Edge Impulse library integration |
-| `build-custom-deployment-blocks` | Edge Impulse custom deployment blocks |
+| `ei-api` | Edge Impulse APIs, CLIs, & SDKs |
+| `ei-build-arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse model integration, and Flask UIs |
+| `ei-firmware-arduino` | Arduino sketches, Edge Impulse library integration |
+| `ei-build-custom-deployment-blocks` | Edge Impulse custom deployment blocks |
 
 ## Experimental skills
 
 | Skill | Purpose |
 | --- | --- |
-| `build-arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router |
-| `build-custom-learning-blocks` | Edge Impulse custom learning blocks (custom ML training containers) |
-| `firmware-cpp` | Desktop, Linux, and generic MCU C++ apps using exported Edge Impulse libraries |
-| `firmware-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models |
-| `firmware-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration |
-| `firmware-zephyr` | Zephyr and nRF Connect SDK module integration |
+| `ei-build-arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router |
+| `ei-build-custom-learning-blocks` | Edge Impulse custom learning blocks (custom ML training containers) |
+| `ei-firmware-cpp` | Desktop, Linux, and generic MCU C++ apps using exported Edge Impulse libraries |
+| `ei-firmware-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models |
+| `ei-firmware-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration |
+| `ei-firmware-zephyr` | Zephyr and nRF Connect SDK module integration |
 
 ## Installing and removing skills
 
-The recommended way to install and manage skills is via the [skills](https://www.npmjs.com/package/skills) npm package developed by [Vercel](https://github.com/vercel-labs).
+The recommended way to install and manage skills is the [`skills`](https://www.npmjs.com/package/skills) CLI developed by [Vercel](https://github.com/vercel-labs/skills). It needs [Node.js](https://nodejs.org) and Git, and it installs skills for [many coding agents](https://github.com/vercel-labs/skills#supported-agents), including Claude Code, Codex, Cursor, and OpenCode.
 
-Below are some of the common commands for the `skills` CLI tool.
+### Browse the catalog
 
-**List all available skills:**
+List every skill in this repository without installing anything. Stable and experimental skills both appear in this list:
 
-```
+```bash
 npx skills add edgeimpulse/agent-tools --list
 ```
 
-**Install a skill (interactively):**
+### Install
 
-```
+Installing interactively prompts for the skills, the agents, and whether to symlink or copy the files:
+
+```bash
 npx skills add edgeimpulse/agent-tools
 ```
 
-**Install a specific skill:**
+Install specific skills by name. `--skill` accepts more than one name:
 
-```
-npx skills add edgeimpulse/agent-tools --skill <skill-name>
+```bash
+npx skills add edgeimpulse/agent-tools --skill ei-api --skill ei-firmware-arduino
 ```
 
-**Remove a specific skill:**
+### Choose an installation scope
 
+Scope decides which projects see the skill. Use global for skills you want everywhere, and the default project scope for skills that belong to one repository.
+
+| Scope | Flag | Installed to |
+| --- | --- | --- |
+| Project (default) | none | `./<agent>/skills/` in the current directory |
+| Global | `-g`, `--global` | `~/<agent>/skills/` in your home directory |
+
+Add `--agent` to target specific agents and `--yes` to skip every prompt, which is what you want in CI or a setup script:
+
+```bash
+npx skills add edgeimpulse/agent-tools --skill ei-api --global --agent claude-code --yes
 ```
-npx skills remove <skill-name>
+
+### List, update, and remove
+
+```bash
+# Show the skills you have installed
+npx skills list
+
+# Update installed skills to the latest version in this repository
+npx skills update ei-api
+
+# Remove a skill (add --global if you installed it globally)
+npx skills remove ei-api
+```
+
+Run `npx skills remove` with no arguments to pick from the installed skills interactively.
+
+### Upgrading from unprefixed names
+
+Skills in this catalog were previously published without the `ei-` prefix (`api`, `firmware-arduino`, and so on). `npx skills update` does not rename an installed skill, so remove the old copy and install the prefixed one:
+
+```bash
+npx skills remove api
+npx skills add edgeimpulse/agent-tools --skill ei-api
+```
+
+### Try a skill without installing it
+
+```bash
+npx skills use edgeimpulse/agent-tools@ei-api --agent claude-code
 ```
 
 ## Catalog lifecycle
