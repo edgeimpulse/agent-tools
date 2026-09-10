@@ -32,38 +32,35 @@ All skill names are prefixed with `ei-` so they stay identifiable once installed
 
 The recommended way to install and manage skills is the [`skills`](https://www.npmjs.com/package/skills) CLI developed by [Vercel](https://github.com/vercel-labs/skills). It needs [Node.js](https://nodejs.org) and Git, and it installs skills for [many coding agents](https://github.com/vercel-labs/skills#supported-agents), including Claude Code, Codex, Cursor, and OpenCode.
 
-### Browse the catalog
-
-List every skill in this repository without installing anything. Stable and experimental skills both appear in this list:
-
-```bash
-npx skills add edgeimpulse/agent-tools --list
-```
-
 ### Install
 
-Installing interactively prompts for the skills, the agents, and whether to symlink or copy the files:
-
 ```bash
+# See what's available without installing anything
+npx skills add edgeimpulse/agent-tools --list
+
+# Pick skills and agents interactively
 npx skills add edgeimpulse/agent-tools
-```
 
-Install specific skills by name. `--skill` accepts more than one name:
-
-```bash
+# Install specific skills by name
 npx skills add edgeimpulse/agent-tools --skill ei-api --skill ei-firmware-arduino
+
+# Install the whole catalog to every detected agent, no prompts
+npx skills add edgeimpulse/agent-tools --all
+
+# Install the whole catalog, but choose the agents yourself
+npx skills add edgeimpulse/agent-tools --skill '*' --agent claude-code --yes
 ```
+
+Experimental skills appear alongside stable ones in all of these. Use `--agent` to target specific agents and `--yes` to skip the prompts in CI.
 
 ### Choose an installation scope
 
-Scope decides which projects see the skill. Use global for skills you want everywhere, and the default project scope for skills that belong to one repository.
+Everything installs into the current project unless you pass `-g`:
 
 | Scope | Flag | Installed to |
 | --- | --- | --- |
 | Project (default) | none | `./<agent>/skills/` in the current directory |
 | Global | `-g`, `--global` | `~/<agent>/skills/` in your home directory |
-
-Add `--agent` to target specific agents and `--yes` to skip every prompt, which is what you want in CI or a setup script:
 
 ```bash
 npx skills add edgeimpulse/agent-tools --skill ei-api --global --agent claude-code --yes
