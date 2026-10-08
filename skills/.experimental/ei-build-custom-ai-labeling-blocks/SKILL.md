@@ -2,7 +2,7 @@
 name: ei-build-custom-ai-labeling-blocks
 description: Author Edge Impulse custom AI labeling blocks (Enterprise). Use when asked to scaffold, modify, test, or push a custom AI labeling block (AI action) — including the parameters.json for ai-action blocks (operatesOn, secret parameters, requiredEnvVariables), the --data-ids-file and --propose-actions arguments, preview mode with set_sample_proposed_changes, writing labels, structured labels, bounding boxes and metadata through the Studio API, the Dockerfile, testing with docker run (the blocks runner does not support AI labeling), and the edge-impulse-blocks init/push workflow.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 Help the user author an Edge Impulse custom AI labeling block. An AI labeling block is a Docker container that Studio runs from a project's **Data acquisition → AI labeling** tab to label a selection of samples with a model or an LLM (single labels, bounding boxes, or audio labels with time ranges). Any language works. The contract is the arguments, environment variables, and Studio API calls the container uses. Custom AI labeling blocks are an **Enterprise-only** feature.
