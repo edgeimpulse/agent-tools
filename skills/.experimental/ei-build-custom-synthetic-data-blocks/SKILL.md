@@ -2,7 +2,7 @@
 name: ei-build-custom-synthetic-data-blocks
 description: Author Edge Impulse custom synthetic data blocks (Enterprise). Use when asked to scaffold, modify, test, or push a custom synthetic data block — including parameters.json for synthetic-data blocks (secret API keys, label, sample count, upload category), the --synthetic-data-job-id argument and x-synthetic-data-job-id Ingestion API header, uploading generated images, audio, or bounding boxes to the Ingestion API, the Dockerfile, testing with docker run (the blocks runner does not support synthetic data blocks), and the edge-impulse-blocks init/push workflow.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 Help the user author an Edge Impulse custom synthetic data block. A synthetic data block is a Docker container that Studio runs from a project's **Data acquisition → Synthetic data** tab to generate samples (images, audio, time series) with a generative model or a custom generator, and upload them to the project through the Ingestion API. Any language works. Custom synthetic data blocks are an **Enterprise-only** feature.
