@@ -16,13 +16,13 @@ All skill names are prefixed with `ei-` so they stay identifiable once installed
 | `ei-build-arduino-uno-q-app-lab` | Arduino UNO Q and App Lab apps, bricks, Edge Impulse model integration, and Flask UIs |
 | `ei-firmware-arduino` | Arduino sketches, Edge Impulse library integration |
 | `ei-build-custom-deployment-blocks` | Edge Impulse custom deployment blocks |
+| `ei-build-custom-learning-blocks` | Edge Impulse custom learning blocks (custom ML training containers) |
 
 ## Experimental skills
 
 | Skill | Purpose |
 | --- | --- |
 | `ei-build-arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router |
-| `ei-build-custom-learning-blocks` | Edge Impulse custom learning blocks (custom ML training containers) |
 | `ei-firmware-cpp` | Desktop, Linux, and generic MCU C++ apps using exported Edge Impulse libraries |
 | `ei-firmware-raspberry-pi-python` | Raspberry Pi and Linux Python inference using EIM models |
 | `ei-firmware-stm32` | STM32CubeIDE and FreeRTOS C++ inference integration |
