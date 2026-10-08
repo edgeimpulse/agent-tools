@@ -2,7 +2,7 @@
 name: ei-build-custom-transformation-blocks
 description: Author Edge Impulse custom transformation blocks (Enterprise). Use when asked to scaffold, modify, test, or push a custom transformation block — including the operating modes (file, directory, standalone), the Dockerfile, parameters.json for transform blocks (operatesOn, cliArguments, requiredEnvVariables, bucket mounts), the --in-file/--in-directory/--out-directory arguments, EI_* environment variables, ei-metadata.json for clinical datasets, and the edge-impulse-blocks init/runner/push workflow.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 Help the user author an Edge Impulse custom transformation block. A transformation block is a Docker container that Studio runs as a **transformation job** to pre-process organization data (resample, split, merge, augment, relabel, extract metadata), to fetch external data, or to run any generic cloud job. Any language works — the contract is only the arguments, environment variables, and mounted directories the container receives. Custom transformation blocks are an **Enterprise-only** feature.

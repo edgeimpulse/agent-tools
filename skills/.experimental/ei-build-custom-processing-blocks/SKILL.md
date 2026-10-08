@@ -2,7 +2,7 @@
 name: ei-build-custom-processing-blocks
 description: Author Edge Impulse custom processing blocks (custom DSP blocks). Use when asked to scaffold, modify, test, host, or push a custom processing block — including the HTTP server that answers GET /, GET /parameters, POST /run, and POST /batch, the generate_features function, parameters.json for dsp blocks (grouped parameters, cppType, port), graphs and feature explorer output, output_config shapes, local testing through ngrok and edge-impulse-blocks runner, and the on-device extract_<cppType>_features C++ implementation.
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 ---
 
 Help the user author an Edge Impulse custom processing block. A processing block (DSP block) turns a window of raw sensor data into features for the learning block. Unlike every other custom block type, it is a **long-running HTTP server**, not a run-once script: Studio sends it raw samples over HTTP and reads features, labels, and graphs back from the response. Any language works.
