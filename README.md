@@ -23,6 +23,7 @@ All skill names are prefixed with `ei-` so they stay identifiable once installed
 | Skill | Purpose |
 | --- | --- |
 | `ei-build-arduino-router-rpc` | Custom MessagePack RPC clients for the Arduino UNO Q MPU/MCU router |
+| `ei-build-custom-ai-labeling-blocks` | Edge Impulse custom AI labeling blocks (automatic labels and bounding boxes, with preview mode) |
 | `ei-build-custom-processing-blocks` | Edge Impulse custom processing blocks (custom DSP feature extraction servers) |
 | `ei-build-custom-transformation-blocks` | Edge Impulse custom transformation blocks (organization data pre-processing jobs) |
 | `ei-firmware-cpp` | Desktop, Linux, and generic MCU C++ apps using exported Edge Impulse libraries |
