@@ -7,7 +7,7 @@ metadata:
 
 Help the user author an Edge Impulse custom transformation block. A transformation block is a Docker container that Studio runs as a **transformation job** to pre-process organization data (resample, split, merge, augment, relabel, extract metadata), to fetch external data, or to run any generic cloud job. Any language works — the contract is only the arguments, environment variables, and mounted directories the container receives. Custom transformation blocks are an **Enterprise-only** feature.
 
-Before writing a block, check whether a pre-built transformation block (organization → **Custom blocks** → **Transformation** → *Public blocks*) or one of the examples in `edgeimpulse/transformation-blocks` already does the job. Synthetic data and AI labeling blocks are transformation blocks in `standalone` mode with their own `type` (`synthetic-data`, `ai-action`) in `parameters.json`. They are not covered here.
+Before writing a block, check whether a pre-built transformation block (organization → **Custom blocks** → **Transformation** → *Public blocks*) or one of the examples in `edgeimpulse/transformation-blocks` already does the job. Synthetic data and AI labeling blocks are transformation blocks in `standalone` mode with their own `type` (`synthetic-data`, `ai-action`) in `parameters.json`. For those, use the `ei-build-custom-synthetic-data-blocks` and `ei-build-custom-ai-labeling-blocks` skills.
 
 ## Choose an operating mode
 
