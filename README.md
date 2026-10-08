@@ -1,7 +1,3 @@
-<p align="center">
-  <img src=".github/social-preview.png" alt="Edge Impulse Agent Skills, with the install command npx skills add edgeimpulse/agent-tools" width="100%">
-</p>
-
 <h1 align="center">Edge Impulse Agent Skills</h1>
 
 <p align="center">
