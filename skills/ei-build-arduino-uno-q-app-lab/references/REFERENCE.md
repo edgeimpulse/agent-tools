@@ -1176,6 +1176,6 @@ adb logcat | grep arduino
 - [Example: Rock Paper Scissors](https://github.com/edgeimpulse/example-rock-paper-scissors-Arduino-UNO-Q) — real-time object-detection game on the UNO Q
 - [Example: Custom Analog Sensor](https://github.com/edgeimpulse/ei-unoq-custom-sensor) — MCU analog sampling streamed to the Linux MPU for EIM inference in Python
 - [Example: Braccio Arm](https://github.com/edgeimpulse/unoq-braccio) — TinkerKit Braccio arm with UNO Q, ROS 2, Edge Impulse, and Gazebo
-- [Arduino UNO Q Docs Source](https://github.com/arduino/docs-content/tree/main/content/hardware/02.uno/boards/uno-q)
+- [Arduino UNO Q Docs Source](https://github.com/arduino/docs-content/tree/main/content/hardware/uno/boards/uno-q)
 - [Arduino App Lab Docs Source](https://github.com/arduino/docs-content/tree/main/content/software/app-lab)
 - [Community Knowledge Base](https://github.com/CWTI-Ltd/arduino_uno_q_knowledge_base_and_playground)
