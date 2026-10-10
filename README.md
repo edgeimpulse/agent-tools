@@ -7,7 +7,6 @@
 <p align="center">
   <a href="https://skills.sh/edgeimpulse/agent-tools"><img src="https://skills.sh/b/edgeimpulse/agent-tools" alt="skills.sh"></a>
   <a href="https://agentskills.io/specification"><img src="https://img.shields.io/badge/Agent%20Skills-spec-3B47C2" alt="Agent Skills specification"></a>
-  <a href="https://github.com/edgeimpulse/agent-tools/actions/workflows/validate-skills.yml"><img src="https://github.com/edgeimpulse/agent-tools/actions/workflows/validate-skills.yml/badge.svg" alt="Validate skills"></a>
 </p>
 
 <p align="center">
